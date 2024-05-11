@@ -16,7 +16,7 @@ class User(Base):
 
     id = Column(String, primary_key=True, default=generate_uuid)
     name = Column(String, nullable=False)
-    created = Column(DateTime, default=generate_now)
+    created = Column(String, default=generate_now)
     email = Column(String, unique=True)
 
     relationship("Task")

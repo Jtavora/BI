@@ -1,4 +1,4 @@
-#!/home/jtavora/modelagem/venv/bin/python3
+#!/home/jtavora/modelagem/aula_modelagem/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
