@@ -12,3 +12,7 @@ Passos realizados na aula:
 `sqlalchemy.url = sqlite:///models.db`
 
 4. criar arquivo `data_models/models.py`, ajustar o caminho do objeto `Base` que estabelece a estrutura dos modelos em `migration/env.py`
+
+5.  docker build -t postgres_bi .
+
+6. docker run --name postgres_bi -p 5432:5432 -d postgres_bi

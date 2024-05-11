@@ -25,8 +25,8 @@ class Task(Base):
     __tablename__ = "tasks"
 
     id = Column(String, primary_key=True, default=generate_uuid)
-    created = Column(DateTime, default=generate_now)
-    updated = Column(DateTime, nullable=False)
+    created = Column(String, default=generate_now)
+    updated = Column(DateTime, default=generate_now)
     task = Column(String, nullable=False)
     status = Column(String, nullable=False)
     priority = Column(String, nullable=False)
