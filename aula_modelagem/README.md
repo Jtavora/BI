@@ -1,4 +1,4 @@
-# Aula - Criação de Base de Dados SQLITE 
+# Aula - Criação de Base de Dados
 
 Utilizamos ORM em python SQLAlchemy e o gerenciador de migrações Alembic.
 
