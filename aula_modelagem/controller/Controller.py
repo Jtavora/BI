@@ -10,10 +10,7 @@ session = sessionmaker(bind=e)
 
 # Create a new user
 def add_user(name, email):
-    s = session()
-    s.add(User(name=name, email=email))
-    s.commit()
-    s.close()
-
-
-add_user("John Doe", "jhon@jhon.com")
+    with session() as s:
+        user = User(name=name, email=email)
+        s.add(user)
+        s.commit()
