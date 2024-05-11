@@ -14,9 +14,14 @@ def add_user(name, email):
         user = User(name=name, email=email)
         s.add(user)
         s.commit()
+        return user.id
 
-def insert_task(task, status, priority, deadline, user_id):
+def insert_task(task, status, priority, deadline, user_id, updated=None):
     with session() as s:
         task = Task(task=task, status=status, priority=priority, deadline=deadline, user_id=user_id)
         s.add(task)
         s.commit()
+    
+def get_user(user_id):
+    with session() as s:
+        return s.query(User).filter_by(id=user_id).first()

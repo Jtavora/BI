@@ -1,4 +1,5 @@
-from controller.Controller import add_user
+from controller.Controller import add_user, insert_task
 
 if __name__ == '__main__':
-    add_user("John Doe2", "jhon2@jhon2.com")
+    id_user = add_user("Joao Teste6", "teste6@teste8.com")
+    insert_task("Teste", "Pendente", "Alta", "2021-12-31", id_user)

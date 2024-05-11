@@ -26,7 +26,7 @@ class Task(Base):
 
     id = Column(String, primary_key=True, default=generate_uuid)
     created = Column(String, default=generate_now)
-    updated = Column(DateTime, default=generate_now)
+    updated = Column(DateTime, nullable=True)
     task = Column(String, nullable=False)
     status = Column(String, nullable=False)
     priority = Column(String, nullable=False)
