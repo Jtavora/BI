@@ -25,3 +25,7 @@ def insert_task(task, status, priority, deadline, user_id, updated=None):
 def get_user(user_id):
     with session() as s:
         return s.query(User).filter_by(id=user_id).first()
+
+def get_tasks():
+    with session() as s:
+        return s.query(Task).all()
