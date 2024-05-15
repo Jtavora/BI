@@ -1,9 +1,9 @@
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import relationship
 from sqlalchemy import *
 import uuid
 from datetime import datetime
-
-Base = declarative_base()
+from Models.Base import Base
+from Models.ClientModel import client_delivery_association
 
 def generate_uuid():
     return str(uuid.uuid4())
@@ -14,20 +14,17 @@ class DeliveryModel(Base):
     id = Column(String(36), primary_key=True, default=generate_uuid)
     product = Column(String(100), nullable=False)
     quantity = Column(Integer, nullable=False)
-    client_id = Column(String(36), ForeignKey("clients.id"), nullable=False)
     status = Column(String(20), nullable=False)
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
-    client = relationship("ClientModel", back_populates="delivery")
-
-    def __repr__(self):
-        return f"<DeliveryModel(id={self.id}, client_id={self.client_id}, status={self.status}, created_at={self.created_at}, updated_at={self.updated_at})>"
+    clients = relationship("ClientModel", secondary=client_delivery_association, back_populates="deliveries")
 
     def to_dict(self):
         return {
             "id": self.id,
-            "client_id": self.client_id,
+            "product": self.product,
+            "quantity": self.quantity,
             "status": self.status,
             "created_at": self.created_at,
             "updated_at": self.updated_at
@@ -43,5 +40,5 @@ class DeliveryModel(Base):
     
     @staticmethod
     def create(session, delivery):
-        session.add(delivery)
-        session.commit()
+        with session.begin():
+            session.add(delivery)
