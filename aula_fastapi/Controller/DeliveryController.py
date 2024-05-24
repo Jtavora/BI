@@ -1,10 +1,16 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from Models.DeliveryModel import DeliveryModel
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+database_url = os.getenv('DATABASE_URL')
 
 class DeliveryController:
     def __init__(self):
-        self.engine = create_engine('postgresql://postgres:123@localhost/postgres')
+        self.engine = create_engine(database_url)
         self.Session = sessionmaker(bind=self.engine)
     
     def get_by_id(self, id):

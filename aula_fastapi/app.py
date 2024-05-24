@@ -36,6 +36,8 @@ def create_client(client: Client):
 @app.post("/delivery")
 def create_delivery(delivery: Delivery):
     client = client_controller.get_by_email(delivery.client_email)
+    if client is None:
+        return {"message": "Client not found!"}
     delivery_data = DeliveryModel(product=delivery.product, quantity=delivery.quantity, status=delivery.status, clients=[client])
     delivery_controller.create(delivery_data)
     return {"Delivery created successfully!"}
